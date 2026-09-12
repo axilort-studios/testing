@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>Axilort Procedinal City Generator</title>
+<style>
+:root{--bg:#050505;--panel:#0d0d0d;--panel2:#121212;--line:#292929;--red:#ff2b2b;--red2:#a90d16;--text:#f4f4f4;--muted:#9a9a9a}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -20%,#26090c 0,#090606 35%,#050505 70%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+body{padding:34px 18px}.shell{max-width:1180px;margin:auto}.brand{display:flex;align-items:center;gap:13px;margin-bottom:32px}.mark{width:44px;height:44px;border:1px solid #ff3333;background:#100404;display:grid;place-items:center;box-shadow:0 0 24px #ff00001c}.mark:after{content:"A";font-weight:900;color:var(--red);font-size:21px}.eyebrow{color:var(--red);font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:800}.brand h1{font-size:18px;margin:3px 0 0}.hero{margin-bottom:28px}.hero h2{font-size:clamp(34px,6vw,64px);line-height:.96;margin:0 0 14px;letter-spacing:-.05em;max-width:850px}.hero h2 span{color:var(--red)}.hero p{color:var(--muted);max-width:690px;margin:0;font-size:15px;line-height:1.65}.grid{display:grid;grid-template-columns:390px 1fr;gap:18px}.panel{background:linear-gradient(145deg,#111,#090909);border:1px solid var(--line);border-radius:10px;padding:20px;box-shadow:0 18px 60px #0008}.panel h3{margin:0 0 4px;font-size:14px}.sub{font-size:12px;color:var(--muted);margin-bottom:20px}.control{margin:17px 0}.row{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:9px}.row label{font-size:12px;font-weight:700}.value{color:var(--red);font-variant-numeric:tabular-nums;font-size:12px}.hint{font-size:10px;color:#666;margin-top:5px}input[type=range]{width:100%;accent-color:var(--red);cursor:pointer}select,input[type=text]{width:100%;background:#080808;color:#eee;border:1px solid #303030;border-radius:6px;padding:10px;font:inherit;font-size:12px;outline:none}select:focus,input[type=text]:focus{border-color:var(--red)}.seedrow{display:grid;grid-template-columns:1fr 42px;gap:7px}.iconbtn{border:1px solid #303030;background:#111;color:#eee;border-radius:6px;cursor:pointer}.iconbtn:hover{border-color:var(--red);color:var(--red)}.generate{width:100%;border:0;background:linear-gradient(90deg,#e71d27,#ff3b3b);color:white;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:14px;border-radius:6px;cursor:pointer;margin-top:10px;box-shadow:0 8px 30px #e51c2d2b}.generate:hover{filter:brightness(1.1);transform:translateY(-1px)}.features{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:18px}.feature{border:1px solid #222;padding:11px;border-radius:6px;background:#0a0a0a}.feature b{display:block;font-size:11px;margin-bottom:3px}.feature span{font-size:10px;color:#707070}.preview{min-height:560px;display:flex;flex-direction:column;overflow:hidden;padding:0}.previewhead{padding:17px 19px;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}.previewhead span{font-size:11px;color:#777}.previewbox{flex:1;display:grid;place-items:center;background:#050505;min-height:500px}.placeholder{text-align:center;color:#555}.placeholder strong{display:block;color:#888;font-size:13px;margin-bottom:5px}.placeholder span{font-size:11px}
+#stage{display:none;position:fixed;inset:0;background:#020202;z-index:1000}.stage-ui{position:absolute;z-index:3;left:18px;right:18px;top:15px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}.stage-ui>*{pointer-events:auto}.badge{background:#090909dd;border:1px solid #333;padding:8px 11px;border-radius:5px;font-size:10px;color:#bbb;backdrop-filter:blur(8px)}.badge b{color:var(--red)}#city{width:100%;height:100%;display:block}.exit{background:#0b0b0b;color:#fff;border:1px solid #444;padding:9px 13px;border-radius:5px;font-size:11px;cursor:pointer}.exit:hover{border-color:var(--red);color:var(--red)}footer{text-align:center;color:#4e4e4e;font-size:10px;margin-top:28px;letter-spacing:.06em}
+@media(max-width:820px){body{padding:22px 12px}.grid{grid-template-columns:1fr}.preview{min-height:300px}.previewbox{min-height:270px}.hero h2{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="shell" id="app">
+  <div class="brand"><div class="mark"></div><div><div class="eyebrow">Axilort Studios</div><h1>Procedinal City Generator</h1></div></div>
+  <section class="hero"><h2>Build cities from <span>rules.</span><br>Generate worlds from <span>nothing.</span></h2><p>A procedural city laboratory by Axilort Studios. Tune the parameters, generate a deterministic city, and explore the result in a dedicated full-screen view.</p></section>
+  <main class="grid">
+    <section class="panel">
+      <h3>Generator controls</h3><div class="sub">Every parameter changes the generated layout.</div>
+      <div class="control"><div class="row"><label for="density">City density</label><span class="value" id="densityV">65%</span></div><input id="density" type="range" min="15" max="100" value="65"></div>
+      <div class="control"><div class="row"><label for="roads">Road complexity</label><span class="value" id="roadsV">55%</span></div><input id="roads" type="range" min="10" max="100" value="55"></div>
+      <div class="control"><div class="row"><label for="height">Building height</label><span class="value" id="heightV">60%</span></div><input id="height" type="range" min="10" max="100" value="60"></div>
+      <div class="control"><div class="row"><label for="parks">Green space</label><span class="value" id="parksV">18%</span></div><input id="parks" type="range" min="0" max="60" value="18"></div>
+      <div class="control"><div class="row"><label for="districts">District variation</label><span class="value" id="districtsV">50%</span></div><input id="districts" type="range" min="0" max="100" value="50"></div>
+      <div class="control"><div class="row"><label for="seed">World seed</label></div><div class="seedrow"><input id="seed" type="text" value="AXL-2048" maxlength="24" spellcheck="false"><button class="iconbtn" id="randomSeed" title="Random seed">↻</button></div><div class="hint">Same seed + same settings = same city.</div></div>
+      <div class="control"><div class="row"><label for="style">Architecture style</label></div><select id="style"><option value="neo">Neo-industrial</option><option value="dense">Megacity</option><option value="low">Low-rise grid</option><option value="mixed">Mixed metropolis</option></select></div>
+      <button class="generate" id="generate">Generate city →</button>
+      <div class="features"><div class="feature"><b>Deterministic</b><span>Seed-based layouts</span></div><div class="feature"><b>Live controls</b><span>Parameters are applied</span></div><div class="feature"><b>Full-screen</b><span>Dedicated city view</span></div><div class="feature"><b>Zero assets</b><span>Pure browser canvas</span></div></div>
+    </section>
+    <section class="panel preview"><div class="previewhead"><strong>Preview</strong><span>Generate to enter full screen</span></div><div class="previewbox"><div class="placeholder"><strong>Your city is waiting.</strong><span>Configure the generator, then click Generate city.</span></div></div></section>
+  </main><footer>AXILORT STUDIOS · PROCEDINAL CITY GENERATOR · BUILT FOR THE WEB</footer>
+</div>
+<div id="stage" aria-hidden="true"><div class="stage-ui"><div class="badge">AXILORT <b>●</b> PROCEDINAL CITY · <span id="stats">READY</span></div><button class="exit" id="exit">Exit preview</button></div><canvas id="city"></canvas></div>
+<script>
+const $=id=>document.getElementById(id);['density','roads','height','parks','districts'].forEach(id=>{const el=$(id),out=$(id+'V');el.addEventListener('input',()=>out.textContent=el.value+'%')});
+function hash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let s=hash(seed)||1;return()=>{s^=s<<13;s^=s>>>17;s^=s<<5;return(s>>>0)/4294967296}}
+function makeCity(){
+ const c=$('city'),ctx=c.getContext('2d'),d=+$('density').value,r=+$('roads').value,h=+$('height').value,p=+$('parks').value,v=+$('districts').value,style=$('style').value,seed=$('seed').value||'AXL';
+ const R=rng(seed+'|'+d+'|'+r+'|'+h+'|'+p+'|'+v+'|'+style);c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);const W=innerWidth,H=innerHeight;
+ ctx.fillStyle='#050505';ctx.fillRect(0,0,W,H);
+ // Subtle ground grid
+ ctx.strokeStyle='#111';ctx.lineWidth=1;const grid=45;for(let x=0;x<W;x+=grid){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=0;y<H;y+=grid){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+ const roadGap=Math.max(48,125-r*.55), roadW=3+r*.045;let roads=[];
+ // Main arteries
+ for(let x=roadGap*.65;x<W;x+=roadGap*(.72+R()*.55)){roads.push({x,main:true})}
+ for(let y=roadGap*.65;y<H;y+=roadGap*(.72+R()*.55)){roads.push({y,main:true})}
+ // secondary roads
+ const sec=roadGap*.52;for(let x=sec*.7;x<W;x+=sec*(.9+R()*.35))roads.push({x,main:false});for(let y=sec*.7;y<H;y+=sec*(.9+R()*.35))roads.push({y,main:false});
+ ctx.lineCap='round';roads.forEach(o=>{ctx.strokeStyle=o.main?'#2a2a2a':'#151515';ctx.lineWidth=o.main?roadW:Math.max(1.5,roadW*.45);ctx.beginPath();if(o.x!==undefined){ctx.moveTo(o.x,0);ctx.lineTo(o.x,H)}else{ctx.moveTo(0,o.y);ctx.lineTo(W,o.y)}ctx.stroke()});
+ // blocks from intersections
+ let buildings=0,parks=0;const bx=Math.max(22,roadGap*.43),by=bx;for(let x=10;x<W-10;x+=bx){for(let y=10;y<H-10;y+=by){
+   if(R()>d/100)continue;let nearRoad=roads.some(o=>(o.x!==undefined&&Math.abs(o.x-x)<roadW*1.8)||(o.y!==undefined&&Math.abs(o.y-y)<roadW*1.8));if(nearRoad)continue;
+   const pw=p/100;if(R()<pw){ctx.fillStyle='#101d14';ctx.fillRect(x+2,y+2,bx-4,by-4);ctx.strokeStyle='#18331f';ctx.strokeRect(x+2,y+2,bx-4,by-4);parks++;continue}
+   const n=style==='low'?2+R()*5:style==='dense'?6+R()*15:style==='mixed'?3+R()*13:4+R()*11;const cols=Math.max(1,Math.floor(2+R()*3)),rows=Math.max(1,Math.floor(2+R()*3));
+   for(let a=0;a<cols;a++)for(let b=0;b<rows;b++){const pad=3,ww=(bx-pad*2)/cols-2,hh=(by-pad*2)/rows-2,xx=x+pad+a*(ww+2),yy=y+pad+b*(hh+2),height=6+n*(.65+R()*.75)*(h/60);const glow=Math.floor(20+R()*18);ctx.fillStyle=`rgb(${glow+18},${glow/3|0},${glow/3|0})`;ctx.fillRect(xx,yy,Math.max(2,ww),Math.max(2,hh));if(R()<.3){ctx.strokeStyle='#351010';ctx.strokeRect(xx+.5,yy+.5,Math.max(1,ww-1),Math.max(1,hh-1))}if(height>10&&R()<.22){ctx.fillStyle='#7a1717';ctx.fillRect(xx+ww*.35,yy+hh*.2,Math.max(1,ww*.3),Math.max(1,hh*.1))}buildings++}
+ }}
+ // red arterial highlights and compass
+ ctx.globalAlpha=.65;ctx.strokeStyle='#7e151b';ctx.lineWidth=1;roads.filter(o=>o.main).slice(0,6).forEach(o=>{ctx.beginPath();if(o.x!==undefined){ctx.moveTo(o.x,0);ctx.lineTo(o.x,H)}else{ctx.moveTo(0,o.y);ctx.lineTo(W,o.y)}ctx.stroke()});ctx.globalAlpha=1;
+ ctx.strokeStyle='#ff2b2b';ctx.lineWidth=2;ctx.beginPath();ctx.arc(W-42,H-42,13,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(W-42,H-61);ctx.lineTo(W-42,H-49);ctx.stroke();ctx.fillStyle='#ff2b2b';ctx.font='9px system-ui';ctx.fillText('N',W-45,H-67);
+ $('stats').textContent=`${buildings.toLocaleString()} BUILDINGS · ${parks} PARKS · SEED ${seed}`;
+}
+function enter(){const stage=$('stage');stage.style.display='block';stage.setAttribute('aria-hidden','false');makeCity();if(stage.requestFullscreen)stage.requestFullscreen().catch(()=>{});}
+$('generate').addEventListener('click',enter);$('randomSeed').addEventListener('click',()=>{$('seed').value='AXL-'+Math.floor(Math.random()*999999).toString(36).toUpperCase()});$('exit').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});$('stage').style.display='none';$('stage').setAttribute('aria-hidden','true')});document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&$('stage').style.display==='block'){$('stage').style.display='none';$('stage').setAttribute('aria-hidden','true')}});addEventListener('resize',()=>{if($('stage').style.display==='block')makeCity()});
+</script>
+</body></html>
